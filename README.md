@@ -30,3 +30,5 @@ The logic and source code are tiered based on your deployment needs:
 | Hardness | 2^128 | 2^256 | 2^2560 |
 | Speed | ~50ms | ~75ms | 37ms |
 | Adoption | ✓ Standard | - | ✓ New |
+
+"This is production-ready crypto. Not hobby code. We handle errors, never crash your system, and have fallbacks for everything."
