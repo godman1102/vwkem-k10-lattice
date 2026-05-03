@@ -9,11 +9,10 @@ A production-grade Module-LWE implementation scaled to $K=10$ for extreme securi
 ## Verified Benchmarks
 These numbers are verified on an **Intel i7-12700F @ 4.9GHz**. The K10 engine is designed to run faster than the average network ping, ensuring security doesn't come at the cost of performance.
 
-| Build Version | Total Handshake | Performance Status |
-| :--- | :--- | :--- |
-| **Standard K10** | 61.18 ms | Verified "Good" Baseline |
-| **AVX2 Accelerated** | **35.69 ms** | **Elite / Production Ready** |
-| **Improvement** | **⚡ 1.71x Faster** | **25.48ms Latency Savings** |
+Implementation,Total Handshake,Execution Profile
+Standard K10,61.18 ms,Reference / Interpreted Logic
+AVX2 Accelerated,35.69 ms,Hardware-Vectorized (SIMD)
+Performance Delta,⚡ 1.71x Faster,25.48 ms Latency Reduction
 
 ## Why K=10?
 Standard implementations like Kyber1024 stop at $K=4$. VWKEM-K10 scales the lattice to a $10 \times 10$ matrix, creating a security floor that is mathematically impossible to brute-force by any classical or quantum computer in existence.
