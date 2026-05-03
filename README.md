@@ -24,3 +24,9 @@ The logic and source code are tiered based on your deployment needs:
 * **[Premium Source & Optimization ($55)](https://www.patreon.com/posts/157267504)**: Includes the **AVX2-accelerated source code**, implementation guides, and technical support for sub-40ms performance.
 
 *This repository serves as the technical benchmark and documentation hub for the VWKEM project.*
+
+| Standard | Kyber512 | Kyber1024 | VWKEM-K10 |
+|----------|----------|-----------|-----------|
+| Hardness | 2^128 | 2^256 | 2^2560 |
+| Speed | ~50ms | ~75ms | 37ms |
+| Adoption | ✓ Standard | - | ✓ New |
