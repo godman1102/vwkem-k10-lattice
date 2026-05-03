@@ -23,3 +23,7 @@ The core logic, implementation guides, and optimized source code are available t
 * **[Premium Source & Optimization ($55)](https://www.patreon.com/posts/157267504)**: Includes full source for **Cython** compilation (targeting sub-10ms performance).
 
 *This repository serves as the technical benchmark and documentation hub for the VWKEM project.*
+
+
+
+Benchmarks performed on Intel i7-12700F @ 4.9GHz. Results may vary based on CPU single-core clock speeds.
