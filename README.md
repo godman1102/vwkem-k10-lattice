@@ -122,16 +122,14 @@ K10 Custom Kyber Tiers:
 
 ### Test Results: 8/8 Passing ✅
 
-| Implementation | Backend | Secrets Match | Performance |
+| Tier | Backend | Latency | Target Use |
 |---|---|---|---|
-| VoidsWrath ULTRA | Python Fallback | ✅ PASS | ~60ms |
-| VoidsWrath COMMUNITY | Pure Python | ✅ PASS | ~60ms |
-| Tier 0 REFERENCE | Pure Python | ✅ PASS | ~60ms |
-| Tier 2 REFERENCE | Pure Python | ✅ PASS | ~60ms |
-| Tier 2 PREMIUM | AVX2 DLL | ✅ PASS | ~155ms (Python) / ~34ms (AVX2) |
-| Tier 3 REFERENCE | Pure Python | ✅ PASS | ~60ms |
-| Tier 3 PREMIUM | AVX2 DLL | ✅ PASS | **37.12ms** |
-| Tier 3 ENTERPRISE | AVX-512 DLL | ✅ PASS | **~12ms** |
+| **Tier 0** (Free) | Pure Python | 60ms | Reference & Audit |
+| **Tier 2** (Premium) | AVX2 C-DLL | 37ms | High-End Gaming / UE5 |
+| **Tier 3** (Enterprise) | AVX-512 C-DLL | 33ms | Enterprise / Server |
+
+**All tiers include the same cryptographic security (IND-CCA2 + Total Paranoia Mode).**
+**Performance difference is optimization only, not security.**
 
 ---
 
