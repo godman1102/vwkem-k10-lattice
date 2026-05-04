@@ -284,3 +284,5 @@ For implementation questions, performance optimization, or custom deployment:
 **All Tests Passing**: 8/8 (100%)  
 **Security Audit**: IND-CCA2 Verified, Total Paranoia Mode Active  
 **Pricing**: One-time purchase (not recurring)
+
+https://www.patreon.com/c/Godman11
