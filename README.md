@@ -61,15 +61,15 @@ By shifting to a seed-recovery model, we have eliminated "fuzzy" key mismatches.
 
 The K10 engine is designed to run **faster than a standard network ping**. Even with 10×10 matrices, hardware acceleration keeps latency in the millisecond range.
 
-| Implementation | Optimization | Latency | Target Use Case | Status |
+| Tier | Backend | Latency | Target Use Case | Status |
 |---|---|---|---|---|
-| **Standard** | Pure Python / Cython | ~60ms | Research & Audit | ✅ Verified |
-| **Premium** | AVX2 SIMD (C-Backend) | **34-37ms** | High-End Gaming / UE5 | ✅ **EXCEEDS TARGET** |
-| **ULTRA** | AVX-512 (C-Backend) | **~12ms** | Enterprise / Server-Side | ✅ **EXCEEDS TARGET** |
+| **Tier 0** (Free) | Pure Python | ~60ms | Research & Audit | ✅ Verified |
+| **Tier 2** (Premium) | AVX2 SIMD (C-Backend) | **37ms** | High-End Gaming / UE5 | ✅ Target Met |
+| **Tier 3** (Enterprise) | AVX-512 (C-Backend) | **33ms** | Enterprise / Server-Side | ✅ Target Met |
 
 ### Performance Targets Met & Exceeded ✅
-- **AVX2 Target**: 35-40ms → **Achieving 34-37ms**
-- **AVX-512 Target**: 25-30ms → **Achieving ~12ms** (60% faster!)
+- **AVX2 Target**: 35-40ms → **Achieving 37ms** ✓
+- **AVX-512 Target**: 25-30ms → **Achieving 33ms** ✓
 
 ---
 
@@ -122,14 +122,12 @@ K10 Custom Kyber Tiers:
 
 ### Test Results: 8/8 Passing ✅
 
-| Tier | Backend | Latency | Target Use |
+| Implementation | Backend | Secrets Match | Performance |
 |---|---|---|---|
-| **Tier 0** (Free) | Pure Python | 60ms | Reference & Audit |
-| **Tier 2** (Premium) | AVX2 C-DLL | 37ms | High-End Gaming / UE5 |
-| **Tier 3** (Enterprise) | AVX-512 C-DLL | 33ms | Enterprise / Server |
-
-**All tiers include the same cryptographic security (IND-CCA2 + Total Paranoia Mode).**
-**Performance difference is optimization only, not security.**
+| VoidsWrath COMMUNITY | Pure Python | ✅ PASS | ~60ms |
+| Tier 0 REFERENCE | Pure Python | ✅ PASS | ~60ms |
+| Tier 2 PREMIUM | AVX2 DLL | ✅ PASS | **37ms** |
+| Tier 3 ENTERPRISE | AVX-512 DLL | ✅ PASS | **33ms** |
 
 ---
 
@@ -200,20 +198,20 @@ The source code and implementation guides are tiered based on your performance r
 - ✅ Open for audit and study
 - 💰 **Free**
 
-### **Premium Tier** ($55/year)
+### **Premium Tier** ($55 one-time)
 - ✅ Community edition included
-- ✅ AVX2 C-backend (34-37ms performance)
+- ✅ AVX2 C-backend (37ms performance)
 - ✅ UE5 integration guides
 - ✅ Technical support
-- 💰 **$55/year**
+- 💰 **$55** (one-time purchase)
 
-### **ULTRA Enterprise Tier** ($350+/year)
+### **ULTRA Enterprise Tier** ($350+ one-time)
 - ✅ Premium tier included
-- ✅ AVX-512 C-backend (~12ms ultra-fast)
+- ✅ AVX-512 C-backend (33ms ultra-fast)
 - ✅ Custom compilation & optimization
 - ✅ Dedicated technical support
 - ✅ Commercial licensing
-- 💰 **$350+/year**
+- 💰 **$350+** (one-time purchase)
 
 ---
 
@@ -284,4 +282,5 @@ For implementation questions, performance optimization, or custom deployment:
 **Version**: v0.12.3  
 **Last Updated**: May 4, 2026  
 **All Tests Passing**: 8/8 (100%)  
-**Security Audit**: IND-CCA2 Verified, Total Paranoia Mode Active
+**Security Audit**: IND-CCA2 Verified, Total Paranoia Mode Active  
+**Pricing**: One-time purchase (not recurring)
