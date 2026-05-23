@@ -6,8 +6,9 @@
 2. [How VWKEM-K10 Works](#how-vwkem-k10-works)
 3. [Understanding the Math](#understanding-the-math)
 4. [Code Walkthrough](#code-walkthrough)
-5. [Running Examples](#running-examples)
-6. [Common Questions](#common-questions)
+5. [Real-World Implementation Tiers](#real-world-implementation-tiers)
+6. [Running Examples](#running-examples)
+7. [Common Questions](#common-questions)
 
 ---
 
@@ -38,7 +39,8 @@ VWKEM-K10 uses **Module-LWE** (Learning With Errors), a lattice-based problem.
 
 ### The Three Operations
 
-**1. Key Generation**
+#### 1. Key Generation
+
 ```
 Create random matrix A (public)
 Create small secret s (kept private)
@@ -49,7 +51,8 @@ Public key: A, b
 Secret key: s
 ```
 
-**2. Encapsulation (Encryption)**
+#### 2. Encapsulation (Encryption)
+
 ```
 Sample random vector t (ephemeral)
 Sample small errors e1, e2
@@ -61,7 +64,8 @@ Ciphertext: u, v
 Shared secret: derived from seed
 ```
 
-**3. Decapsulation (Decryption)**
+#### 3. Decapsulation (Decryption)
+
 ```
 Recover message from: m' = v - u^T·s
 
@@ -138,6 +142,7 @@ def poly_mult(a, b):
 ### Matrix-Vector Operations
 
 **Key generation** involves:
+
 ```
 b = A·s + e
 
@@ -203,6 +208,7 @@ def keygen():
 ```
 
 **What's happening:**
+
 1. Use a seed to generate randomness deterministically (auditable)
 2. Create a 10×10 matrix of random polynomials (A is public)
 3. Create a secret vector with small coefficients (-1, 0, 1)
@@ -252,6 +258,7 @@ def encapsulate(pk):
 ```
 
 **What's happening:**
+
 1. Use the public key to create encryption
 2. Sample ephemeral randomness (fresh for each message)
 3. Compute `u = A^T·t + e1` (changes the matrix orientation!)
@@ -282,12 +289,14 @@ def decapsulate(sk, ct):
 **Why this works (the magic):**
 
 Starting with:
+
 ```
 u = A^T·t + e1
 v = b^T·t + e2
 ```
 
 We compute:
+
 ```
 m' = v - u^T·s
    = (b^T·t + e2) - (A^T·t + e1)^T·s
@@ -295,6 +304,7 @@ m' = v - u^T·s
 ```
 
 Recall: `b = A·s + e` (from keygen), so:
+
 ```
 m' = (A·s + e)^T·t + e2 - t^T·A·s - e1^T·s
    = t^T·A^T·s + e^T·t + e2 - t^T·A·s - e1^T·s
@@ -308,11 +318,11 @@ The message hides in the high bits of `m'`. Since the error terms are small, the
 
 ## Real-World Implementation Tiers
 
-### Tier 1: Standard Edition (Cython) - Discord Bot Authentication
+### Tier 1: Standard Edition (Cython) - Discord Bot Quantum Heartbeat Authentication
 
-**Use Case**: VoidsWrath-style quantum-safe heartbeat authentication for bot connections.
+**Use Case:** VoidsWrath-style quantum-safe heartbeat authentication for bot connections.
 
-Tier 1 compiles with Cython for **~60ms performance** - perfect for bot initialization and periodic authentication.
+Tier 1 compiles with Cython for ~60ms performance - perfect for bot initialization and periodic authentication.
 
 ```python
 # Tier 1: Standard Edition - Bot Quantum Heartbeat Authentication
@@ -381,12 +391,14 @@ class QuantumHeartbeatAuth:
 ```
 
 **Why Tier 1 Here:**
-- ✅ 60ms is acceptable for bot initialization (one-time cost)
-- ✅ 30-second heartbeat needs <100ms latency (well under budget)
-- ✅ Cython is cross-platform (Windows, Linux, macOS)
-- ✅ No external DLL dependencies
+
+✅ 60ms is acceptable for bot initialization (one-time cost)
+✅ 30-second heartbeat needs <100ms latency (well under budget)
+✅ Cython is cross-platform (Windows, Linux, macOS)
+✅ No external DLL dependencies
 
 **Example Flow:**
+
 ```
 User connects to bot
   ↓
@@ -407,9 +419,9 @@ User connects to bot
 
 ### Tier 2: Premium Edition (AVX2) - High-Performance Server Authentication
 
-**Use Case**: Enterprise server handling thousands of concurrent K10 sessions.
+**Use Case:** Enterprise server handling thousands of concurrent K10 sessions.
 
-Tier 2 optimizes with C + AVX2 for **~37ms performance** - essential for server throughput.
+Tier 2 optimizes with C + AVX2 for ~37ms performance - essential for server throughput.
 
 ```python
 # Tier 2: Premium Edition - Enterprise Session Manager
@@ -537,21 +549,23 @@ class EnterpriseQuantumGateway:
 ```
 
 **Why Tier 2 Here:**
-- ✅ 37ms per full cycle supports 27 concurrent clients/second
-- ✅ AVX2 SIMD speedup (1.65× faster than Tier 1)
-- ✅ Enterprise deployments need high throughput
-- ✅ Machine learning servers benefit from vector optimization
-- ✅ 16.7ms encapsulation enables massive parallelization
+
+✅ 37ms per full cycle supports 27 concurrent clients/second
+✅ AVX2 SIMD speedup (1.65× faster than Tier 1)
+✅ Enterprise deployments need high throughput
+✅ Machine learning servers benefit from vector optimization
+✅ 16.7ms encapsulation enables massive parallelization
 
 **Tier 2 vs Tier 1 Comparison:**
+
 ```
-Operation      Tier 1 (Cython)    Tier 2 (AVX2)    Speedup
-─────────────────────────────────────────────────────────
-Keygen         18.7ms             18.9ms           0.99×
-Encapsulation  27.0ms             16.7ms           1.62×
-Decapsulation  1.5ms              1.6ms            0.94×
-──────────────────────────────────────────────────────────
-Full Cycle     ~47ms              ~37ms            1.27×
+Operation          Tier 1 (Cython)    Tier 2 (AVX2)    Speedup
+─────────────────────────────────────────────────────────────
+Keygen             18.7ms             18.9ms           0.99×
+Encapsulation      27.0ms             16.7ms           1.62×
+Decapsulation      1.5ms              1.6ms            0.94×
+─────────────────────────────────────────────────────────────
+Full Cycle         ~47ms              ~37ms            1.27×
 
 Enterprise Impact:
   Tier 1: 21 concurrent KEM cycles/second
@@ -563,6 +577,7 @@ For 10,000 clients:
 ```
 
 **Real-World Server Scenario:**
+
 ```python
 # Load balancer with 1000s of clients
 gateway = EnterpriseQuantumGateway()
@@ -588,7 +603,7 @@ result = await gateway.complete_session(
 
 ---
 
-
+## Running Examples
 
 ### Basic Key Generation
 
@@ -634,6 +649,7 @@ This compares performance across all available tiers.
 ### Q: Why is this slow?
 
 **A:** The Community Edition is pure Python (interpreted, not compiled). It prioritizes:
+
 1. **Clarity** — Every operation is readable
 2. **Auditability** — No hidden binary logic
 3. **Learning** — You can understand every line
@@ -645,12 +661,14 @@ For production, upgrade to Standard (Cython) or Premium (C + AVX2).
 **A:** The Community Edition uses correct mathematics. Security comes from the hardness of Module-LWE, not the implementation speed.
 
 However, this is for **learning and prototyping**, not shipping to production. For production:
+
 - Use Standard Edition (Cython, open-source, no dependencies)
 - Or Premium Edition (C + AVX2, production-proven)
 
 ### Q: Why Module-LWE?
 
-**A:** 
+**A:**
+
 - Quantum-hard (believed safe against quantum computers)
 - Mature algorithm (studied since 2005)
 - Efficient (polynomial operations, not exponential)
@@ -679,6 +697,7 @@ for i in range(K):
 ```
 
 Instead of storing random data, we store just the seed and derive everything. This:
+
 - Saves space
 - Makes the algorithm auditable
 - Ensures reproducibility
@@ -686,6 +705,7 @@ Instead of storing random data, we store just the seed and derive everything. Th
 ### Q: How do I upgrade to faster tiers?
 
 **A:**
+
 ```python
 # Community Edition
 from vwkem_k10_community_working import keygen, encapsulate, decapsulate
