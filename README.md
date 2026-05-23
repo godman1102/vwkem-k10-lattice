@@ -9,7 +9,7 @@ Zero Python interpreter overhead on core operations. Direct CPU execution. Const
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │ Python Layer (Minimal Orchestration)                            │
-│ - High-level API (kyber_assembly_module.py)                    │
+│ - High-level API (kyber_assembly_module.py)                     │
 │ - Key material handling                                         │
 │ - Ciphertext I/O                                                │
 └──────────────────────────┬──────────────────────────────────────┘
@@ -17,9 +17,9 @@ Zero Python interpreter overhead on core operations. Direct CPU execution. Const
                            │ ctypes interface (zero overhead)
                            ↓
 ┌─────────────────────────────────────────────────────────────────┐
-│ x86-64 Assembly (Pure CPU Execution - phantom_kyber_k10.dll)   │
+│ x86-64 Assembly (Pure CPU Execution - phantom_kyber_k10.dll)    │
 │                                                                 │
-│ ✓ Core Kyber operations (NTT, poly_mult, sampling)             │
+│ ✓ Core Kyber operations (NTT, poly_mult, sampling)              │
 │ ✓ Phases I-XV phantom masking integrated                        │
 │ ✓ Constant-time execution (no data-dependent branches)          │
 │ ✓ Direct register control (no compiler interference)            │
